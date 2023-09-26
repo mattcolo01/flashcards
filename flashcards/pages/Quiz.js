@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
-import { Animated, StyleSheet, View } from "react-native";
+import { Animated, StyleSheet, Text, Vibration, View } from "react-native";
 
 import Card from "../components/Card";
 
 export default function Quiz() {
+    const [score, setScore] = useState(0);
     const [current, setCurrent] = useState(0);
     var position = useRef(new Animated.ValueXY()).current;
     
@@ -26,7 +27,7 @@ export default function Quiz() {
         },
         {
             question: "Is the ocean purple?",
-            answer: true,
+            answer: false,
         },
     ];
 
@@ -39,12 +40,18 @@ export default function Quiz() {
                         index={index-current}
                         question={question.question}
                         position={position}
-                        swipeHandler={() => { setCurrent(current + 1) }}
+                        swipeHandler={swipeHandler}
                         />
             }).reverse() }
-
+            { questions.length - current === 0 && <Text>Score: {score}</Text>}
         </View>
     );
+
+    function swipeHandler(isRight, index) {
+        if ( isRight === questions[index+current].answer ) setScore(score + 1);
+        else Vibration.vibrate(1000); //TO DO replace with red rippling bachground
+        setCurrent(current + 1);
+    }
 }
 
 const styles = StyleSheet.create({

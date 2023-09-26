@@ -15,7 +15,7 @@ export default function Card({question, index, swipeHandler, position}) {
                     toValue: { x: SCREEN_WIDTH+100, y: gestureState.dy },
                     useNativeDriver: true,
                 }).start( async () => {
-                    await swipeHandler();
+                    swipeHandler(true, index);
                     position.setValue({ x: 0, y: 0 });
                 });
             } else if (gestureState.dx < -120) {
@@ -23,7 +23,7 @@ export default function Card({question, index, swipeHandler, position}) {
                     toValue: { x: -SCREEN_WIDTH-100, y: gestureState.dy },
                     useNativeDriver: true,
                 }).start( () => {
-                    swipeHandler();
+                    swipeHandler(false, index);
                     position.setValue({ x: 0, y: 0 });
                 });
             } else {
