@@ -4,9 +4,8 @@ import { StyleSheet, Text, Animated, PanResponder, Dimensions } from 'react-nati
 const SCREEN_WIDTH = Dimensions.get('window').width
 
 export default function Card({question, index, swipeHandler, position}) {
-    //let position = useRef(new Animated.ValueXY()).current;
 
-    let panResponder = useRef( PanResponder.create({
+    let panResponder = PanResponder.create({
         onStartShouldSetPanResponder: (evt, gestureState) => true,
         onPanResponderMove: (evt, gestureState) => {
             position.setValue({ x: gestureState.dx, y: gestureState.dy });
@@ -36,7 +35,7 @@ export default function Card({question, index, swipeHandler, position}) {
                 }).start();
             }
         }
-    }) ).current;
+    });
 
     let rotation = position.x.interpolate({
         inputRange: [-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
@@ -71,8 +70,6 @@ export default function Card({question, index, swipeHandler, position}) {
         });
     }
 
-
-
     return (
         <>
             <Animated.View
@@ -91,9 +88,9 @@ export default function Card({question, index, swipeHandler, position}) {
                             ]
                             :
                             [{ 
-                                translateY: translation //-5*Math.min(index, 3)
+                                translateY: translation
                             }, {
-                                scaleX: scaling //1 - 0.05*Math.min(index, 3)
+                                scaleX: scaling
                             }]
                     },
                 ]} >
