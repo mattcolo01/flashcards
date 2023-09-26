@@ -38,11 +38,11 @@ export default function Quiz() {
                         key={index-current}
                         index={index-current}
                         question={question.question}
-                        answer={question.answer}
                         position={position}
                         swipeHandler={() => { setCurrent(current + 1) }}
                         />
             }).reverse() }
+
         </View>
     );
 }

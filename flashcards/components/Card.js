@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { StyleSheet, Text, Animated, PanResponder, Dimensions } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -42,6 +41,11 @@ export default function Card({question, index, swipeHandler, position}) {
         outputRange: ['-10deg', '0deg', '10deg'],
         extrapolate: 'clamp',
     });
+    let color = position.x.interpolate({
+        inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH],
+        outputRange: ['red', 'white', 'green'],
+        extrapolate: 'clamp',
+    });
 
     let scaling = 1, translation = 0, elevation = 0;
     if(index > 0) {
@@ -76,6 +80,7 @@ export default function Card({question, index, swipeHandler, position}) {
                 {... panResponder.panHandlers}
                 style={[
                     styles.card,
+                    index === 0 && { backgroundColor: color },
                     index < 4 && { elevation: 5 },
                     index === 4 && { elevation: elevation },
                     {
@@ -118,6 +123,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 1 },
         shadowRadius: 1,
         shadowOpacity: 0.25,
+        zIndex: 2,
     },
     cardText: {
         fontSize: 20,
