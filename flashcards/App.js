@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Switch, View } from 'react-native';
+import Quiz from './pages/Quiz';
+import { useState } from 'react';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	const [isDark, setIsDark] = useState(false);
+
+	const changeHandler = () => {
+		setIsDark(!isDark);
+	}
+
+	return (
+		<View style={styles.background} >
+			{/* <Switch
+				onValueChange={changeHandler}
+				value={isDark}
+				style={styles.modeSwitch}
+				trackColor={{ true: "grey" }}
+				thumbColor={isDark ? "#000000" : "#ffffff"}
+				/> */}
+			<Quiz />
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    modeSwitch: {
+        position: 'absolute',
+        top: 20,
+        left: 5,
+    },
+	background: {
+		flex: 1,
+		backgroundColor: '#fff',
+	}
 });
