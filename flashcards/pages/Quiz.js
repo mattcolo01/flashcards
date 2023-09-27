@@ -49,7 +49,7 @@ export default function Quiz() {
                         />
             }).reverse() }
             { questions.length - current === 0 && <>
-                <Text>Score: {score+"\n"}</Text>
+                <Text onLayout={ () => {Vibration.vibrate(1000,false)} } >Score: {score+"\n"}</Text>
                 <Button title="Restart" onPress={() => {setCurrent(0); setScore(0)}} />
             </> }
             <Animated.View style={{ ...styles.circle, opacity: opacityValue, transform: [{scale: scaleFactor}] }} />
