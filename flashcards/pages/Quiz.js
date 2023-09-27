@@ -57,8 +57,8 @@ export default function Quiz() {
         </View>
     );
 
-    function swipeHandler(isRight, index) {
-        if ( isRight === questions[index+current].answer ) setScore(score + 1);
+    function swipeHandler(isRight) {
+        if ( isRight === questions[current].answer ) setScore(score + 1);
         else {
             Animated.parallel([
                 Animated.timing(scaleFactor, {
