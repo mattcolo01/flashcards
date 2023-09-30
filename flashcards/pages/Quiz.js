@@ -9,7 +9,6 @@ export default function Quiz() {
 
     const scaleFactor = useRef(new Animated.Value(0)).current;
     const opacityValue = useRef(new Animated.Value(1)).current;
-    let animationGroup;
 
     var position = useRef(new Animated.ValueXY()).current;
     
@@ -86,6 +85,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent:'center',
+        pointerEvents: 'box-none',
     },
     circle: {
         position: 'absolute',
